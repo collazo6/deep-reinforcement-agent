@@ -19,10 +19,10 @@ def load_env():
     env_loc = r'./unity_env'
 
     # Set path for unity environment based on operating system.
-    if sys.platform == 'linux':
-        p = os.path.join(env_loc, r'Banana_Linux/Banana.x86_64')
-    elif sys.platform == 'darwin':
+    if sys.platform == 'darwin':
         p = os.path.join(env_loc, r'Banana')
+    elif sys.platform == 'linux':
+        p = os.path.join(env_loc, r'Banana_Linux/Banana.x86_64')
     else:
         p = os.path.join(env_loc, r'Banana_Windows_x86_64/Banana.exe')
 
@@ -88,15 +88,14 @@ def create_agent(state_size, action_size, buffer_size=int(1e5), batch_size=64,
     return agent
 
 
-def train_agent(agent, env, n_episodes=1000, max_t=1000, eps_start=1.0,
-                eps_end=0.01, eps_decay=0.995, save_dir=r'./final_model'):
+def create_trainer(agent, env, max_t=1000, eps_start=1.0, eps_end=0.01,
+                   eps_decay=0.995, save_dir=r'./final_model'):
     """
-    This function carries out the training process for the designated agent.
+    This function creates the trainer to train agent in specified environment.
 
     Arguments:
         agent: An Agent object used for training.
         env: A UnityEnvironment used for Agent evaluation and training.
-        n_episodes: An integer for maximum number of training episodes.
         max_t: An integer for maximum number of timesteps per episode.
         eps_start: A float for the starting value of epsilon, for
             epsilon-greedy action selection.
@@ -104,6 +103,9 @@ def train_agent(agent, env, n_episodes=1000, max_t=1000, eps_start=1.0,
         eps_decay: A float multiplicative factor (per episode) for decreasing
             epsilon.
         save_dir: Path designating directory to save resulting files.
+
+    Returns:
+        trainer: A DQNTrainer object used to train agent in environment.
     """
 
     # Create DQNTrainer object to train agent.
@@ -117,12 +119,25 @@ def train_agent(agent, env, n_episodes=1000, max_t=1000, eps_start=1.0,
         save_dir=save_dir
     )
 
+    return trainer
+
+
+def train_agent(trainer, n_episodes):
+    """
+    This function carries out the training process with specified trainer.
+
+    Arguments:
+        env: A UnityEnvironment used for Agent evaluation and training.
+        trainer: A DQNTrainer object used to train agent in environment.
+        n_episodes: An integer for maximum number of training episodes.
+    """
+
     # Train the agent with trainer object.
     t_start = time.time()
     print('Starting training...')
     trainer.train(n_episodes=n_episodes)
     print('\nFinished training, closing env.')
-    env.close()
+    trainer.env.close()
     t_end = time.time()
 
     # Notify of time needed to train agent to solve environment.
@@ -136,13 +151,33 @@ def train_agent(agent, env, n_episodes=1000, max_t=1000, eps_start=1.0,
     print('Done.')
 
 
+def restore_agent(trainer, filename):
+    """
+    This function restores the saved q network parameters of a past successful
+    agent for further evaluation.
+
+    Arguments:
+        trainer: A DQNTrainer object used to train agent in environment.
+        filename: A string filename of file containing saved parameters
+            for the local q network of a past successful agent.
+    """
+    trainer.restore(filename)
+    return trainer.agent
+
+
 if __name__ == '__main__':
 
     # Initialize environment and extract action and state dimensions.
     env, state_size, action_size = load_env()
 
     # Create agent used for training.
-    agent = create_agent(state_size, action_size, duel=True)
+    agent = create_agent(state_size, action_size, duel=False)
+
+    # Create DQNTrainer object to train agent.
+    trainer = create_trainer(agent, env)
 
     # Train agent in specified environment!
-    train_agent(agent, env)
+    train_agent(trainer, 1000)
+
+    # Restore past successful agent.
+    # agent = restore_agent(trainer, 'checkpoint_dueling_dqn.pth')

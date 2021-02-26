@@ -3,6 +3,8 @@ from collections import deque
 import pandas as pd
 import numpy as np
 import torch
+import math
+import os
 
 plt.style.use('dark_background')
 
@@ -15,7 +17,6 @@ class DQNTrainer:
     Attributes:
         agent: An Agent object used for training.
         env: A UnityEnvironment used for Agent evaluation and training.
-        n_episodes: An integer for maximum number of training episodes.
         max_t: An integer for maximum number of timesteps per episode.
         eps_start: A float for the starting value of epsilon, for
             epsilon-greedy action selection.
@@ -44,7 +45,12 @@ class DQNTrainer:
         self.scores_window = deque(maxlen=100)
 
     def process_observation(self, observation):
-        """Adds leading dimension for model utilization."""
+        """
+        Adds leading dimension to observation data for model utilization.
+
+        Attributes:
+            observation: An array of data from agent to evaluate state.
+        """
         return np.expand_dims(observation, 0)
 
     def run_episode(self):
@@ -54,7 +60,6 @@ class DQNTrainer:
         env_info = self.env.reset(train_mode=True)[self.brain_name]
         observation = env_info.vector_observations[0].copy()
         state = self.process_observation(observation)
-
         score = 0
 
         # For each time step, select action and evaluate next state params.
@@ -86,7 +91,12 @@ class DQNTrainer:
         self.eps = max(self.eps_end, self.eps_decay * self.eps)
 
     def train(self, n_episodes):
-        """Run training for n_episodes."""
+        """
+        Run training on agent for n_episodes.
+
+        Attributes:
+            n_episodes: An integer for maximum number of training episodes.
+        """
 
         # For each episode, evaluate scores and save when environment solved.
         for i in range(1, n_episodes + 1):
@@ -102,7 +112,6 @@ class DQNTrainer:
 
             # For each 100 episodes, print relevant statistics.
             if self.i_episode % 100 == 0:
-                self.plt_rolling_avgs()
                 print(f'\rEpisode {self.i_episode}'
                       f'\tAverage Score: {np.mean(self.scores_window):.2f}'
                       f'\tEps: {self.eps:.3f}'
@@ -110,7 +119,6 @@ class DQNTrainer:
 
             # If env solved, plot learning curve and save model params.
             if np.mean(self.scores_window) >= 13:
-
                 self.plt_rolling_avgs()
                 self.save()
 
@@ -126,33 +134,55 @@ class DQNTrainer:
 
     def save(self):
         """Saves parameters for successful network."""
+        model = 'dueling_dqn' if self.agent.hparams.duel else 'dqn'
         torch.save(
             self.agent.qnetwork_local.state_dict(),
-            rf'{self.save_dir}/checkpoint_{self.i_episode}.pth'
+            rf'{self.save_dir}/checkpoint_{model}.pth'
         )
 
-    def restore(self, i_episode):
+    def restore(self, filename):
         """Loads parameters for successful network."""
         self.agent.qnetwork_local.load_state_dict(
-            torch.load(rf'{self.save_dir}/checkpoint_{i_episode}.pth')
+            torch.load(os.path.join(self.save_dir, filename))
         )
 
     def plt_rolling_avgs(self):
         """Plots learning curve for successful network."""
 
-        # Set title of plot based on Q Network algorithm used.
-        model_type = 'Dueling Q Network' if self.agent.hparams.duel else \
-            'Q Network'
+        # Set model type strings for plot title and filename.
+        model_type, mod = ('Dueling Q Network', 'dqn') if \
+            self.agent.hparams.duel else ('Q Network', 'qn')
 
         # Calculate rolling averages based on the last 25 episodes.
-        rolling_avgs = pd.DataFrame(self.scores).rolling(25).mean()
+        rolling_avgs = pd.DataFrame(self.scores).rolling(100).mean()
 
         # Force index to start at 1 for 1st episode.
         rolling_avgs.index += 1
 
+        # Set coordinates (episode, score) when agent solved env.
+        x = self.i_episode
+        y = int(rolling_avgs[0].iloc[-1])
+
+        # Set x, y ticks for graph axes and color for line.
+        x_ticks = np.arange(100, int(50 * math.ceil(x/50)) + 1, 50)
+        y_ticks = np.arange(0, int(y+2), 1)
+        line_color = 'c' if mod == 'qn' else 'y'
+
         # Plot rolling averages and save resulting plot
-        plt.plot(rolling_avgs, marker='o', markersize=6, markerfacecolor='w')
-        plt.title(f'Learning Curve: {model_type}', fontsize=30)
-        plt.grid(color='w', linewidth=0.2)
-        plt.savefig(rf'{self.save_dir}/scores_mavg_{self.i_episode}')
+        fig, ax = plt.subplots(figsize=(12, 9))
+        ax.plot(rolling_avgs, color=line_color)
+        ax.grid(color='w', linewidth=0.2)
+        ax.set_xticks(x_ticks)
+        ax.set_yticks(y_ticks)
+        ax.set_title(f'Learning Curve: {model_type}', fontsize=30)
+        ax.set_xlabel('Episode', fontsize=20)
+        ax.set_ylabel('Score', fontsize=20)
+        ax.annotate(
+            f'Episode: {x}\nScore: {y}',
+            fontsize=10,
+            xy=(x, y),
+            xytext=(x-20, y+0.15),
+            horizontalalignment='left'
+        )
+        plt.savefig(rf'{self.save_dir}/scores_mavg_{mod}_{x}')
         plt.show()
