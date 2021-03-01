@@ -17,6 +17,8 @@ class DQNTrainer:
     Attributes:
         agent: An Agent object used for training.
         env: A UnityEnvironment used for Agent evaluation and training.
+        end_score: The integer score (averaged over the past 100 episodes)
+            in which the environment is considered solved by the agent.
         max_t: An integer for maximum number of timesteps per episode.
         eps_start: A float for the starting value of epsilon, for
             epsilon-greedy action selection.
@@ -26,7 +28,7 @@ class DQNTrainer:
         save_dir: String designating directory to save files.
     """
 
-    def __init__(self, agent, env, max_t, eps_start, eps_end,
+    def __init__(self, agent, env, end_score, max_t, eps_start, eps_end,
                  eps_decay, save_dir):
         """Initializes DQNTrainer object."""
 
@@ -34,6 +36,7 @@ class DQNTrainer:
         self.agent = agent
         self.env = env
         self.brain_name = env.brain_names[0]
+        self.end_score = end_score
         self.max_t = max_t
         self.eps_start = eps_start
         self.eps_end = eps_end
@@ -44,22 +47,13 @@ class DQNTrainer:
         self.scores = []
         self.scores_window = deque(maxlen=100)
 
-    def process_observation(self, observation):
-        """
-        Adds leading dimension to observation data for model utilization.
-
-        Attributes:
-            observation: An array of data from agent to evaluate state.
-        """
-        return np.expand_dims(observation, 0)
-
     def run_episode(self):
         """Runs a single episode and returns the corresponding score."""
 
         # Reset initial state and score.
         env_info = self.env.reset(train_mode=True)[self.brain_name]
         observation = env_info.vector_observations[0].copy()
-        state = self.process_observation(observation)
+        state = np.expand_dims(observation, 0)
         score = 0
 
         # For each time step, select action and evaluate next state params.
@@ -68,7 +62,7 @@ class DQNTrainer:
             action = int(action)
             env_info = self.env.step(action)[self.brain_name]
             observation = env_info.vector_observations[0].copy()
-            next_state = self.process_observation(observation)
+            next_state = np.expand_dims(observation, 0)
             reward = env_info.rewards[0]
             done = env_info.local_done[0]
             self.agent.step(state, action, reward, next_state, done)
@@ -79,7 +73,7 @@ class DQNTrainer:
 
         return score
 
-    def step_train(self) -> None:
+    def step_train(self):
         """Executes one step of the training process."""
 
         # Get corresponding score from most recent run.
@@ -117,15 +111,21 @@ class DQNTrainer:
                       f'\tEps: {self.eps:.3f}'
                       f'\tNumber of memories: {len(self.agent.memory)}')
 
-            # If env solved, plot learning curve and save model params.
-            if np.mean(self.scores_window) >= 13:
-                self.plt_rolling_avgs()
-                self.save()
+            # If training resolved, save files and notify of statistics.
+            if np.mean(self.scores_window) >= self.end_score or \
+                    self.i_episode == n_episodes:
 
-                print(
-                    f'\nEnvironment solved in {self.i_episode - 100} episodes!'
-                    f'\tAverage Score: {np.mean(self.scores_window):.2f}'
-                )
+                # Create and save learning curve plot.
+                self.plt_rolling_avgs()
+
+                # Save successful agent model params and notify of statistics.
+                if self.i_episode < n_episodes:
+                    self.save()
+                    s_ep = self.i_episode - 100
+                    print(
+                        f'\nEnvironment solved in {s_ep} episodes!'
+                        f'\tAverage Score: {np.mean(self.scores_window):.2f}'
+                    )
                 break
 
             self.i_episode += 1
@@ -134,7 +134,7 @@ class DQNTrainer:
 
     def save(self):
         """Saves parameters for successful network."""
-        model = 'dueling_dqn' if self.agent.hparams.duel else 'dqn'
+        model = 'dqn' if self.agent.hparams.duel else 'qn'
         torch.save(
             self.agent.qnetwork_local.state_dict(),
             rf'{self.save_dir}/checkpoint_{model}.pth'
@@ -150,7 +150,7 @@ class DQNTrainer:
         """Plots learning curve for successful network."""
 
         # Set model type strings for plot title and filename.
-        model_type, mod = ('Dueling Q Network', 'dqn') if \
+        model_type, model = ('Dueling Q Network', 'dqn') if \
             self.agent.hparams.duel else ('Q Network', 'qn')
 
         # Calculate rolling averages based on the last 25 episodes.
@@ -161,12 +161,14 @@ class DQNTrainer:
 
         # Set coordinates (episode, score) when agent solved env.
         x = self.i_episode
-        y = int(rolling_avgs[0].iloc[-1])
+        y = rolling_avgs[0].iloc[-1]
 
         # Set x, y ticks for graph axes and color for line.
-        x_ticks = np.arange(100, int(50 * math.ceil(x/50)) + 1, 50)
-        y_ticks = np.arange(0, int(y+2), 1)
-        line_color = 'c' if mod == 'qn' else 'y'
+        x_end = int(100 * math.ceil(x/100)) + 1
+        x_max = x_end if x_end - x >= 50 else x_end + 100
+        x_ticks = np.arange(0, x_max, 50)
+        y_ticks = np.arange(0, int(y)+2, 1)
+        line_color = 'c' if model == 'qn' else 'y'
 
         # Plot rolling averages and save resulting plot
         fig, ax = plt.subplots(figsize=(12, 9))
@@ -181,8 +183,8 @@ class DQNTrainer:
             f'Episode: {x}\nScore: {y}',
             fontsize=10,
             xy=(x, y),
-            xytext=(x-20, y+0.15),
+            xytext=(x-22, y+0.15),
             horizontalalignment='left'
         )
-        plt.savefig(rf'{self.save_dir}/scores_mavg_{mod}_{x}')
+        plt.savefig(rf'{self.save_dir}/scores_mavg_{model}_{x}')
         plt.show()

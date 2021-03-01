@@ -6,17 +6,17 @@ import sys
 import os
 
 
-def load_env():
+def load_env(env_loc):
     """
     This function initializes the UnityEnviornment based on the running
     operating system.
 
+    Arguments:
+        env_loc: A string designating unity environment directory.
+
     Returns:
         env: A UnityEnvironment used for Agent evaluation and training.
     """
-
-    # Designate unity environment directory.
-    env_loc = r'./unity_env'
 
     # Set path for unity environment based on operating system.
     if sys.platform == 'darwin':
@@ -88,14 +88,16 @@ def create_agent(state_size, action_size, buffer_size=int(1e5), batch_size=64,
     return agent
 
 
-def create_trainer(agent, env, max_t=1000, eps_start=1.0, eps_end=0.01,
-                   eps_decay=0.995, save_dir=r'./final_model'):
+def create_trainer(agent, env, end_score, max_t=1000, eps_start=1.0,
+                   eps_end=0.01, eps_decay=0.995, save_dir=r'./final_model'):
     """
     This function creates the trainer to train agent in specified environment.
 
     Arguments:
         agent: An Agent object used for training.
         env: A UnityEnvironment used for Agent evaluation and training.
+        end_score: The integer score (averaged over the past 100 episodes)
+            in which the environment is considered solved by the agent.
         max_t: An integer for maximum number of timesteps per episode.
         eps_start: A float for the starting value of epsilon, for
             epsilon-greedy action selection.
@@ -112,6 +114,7 @@ def create_trainer(agent, env, max_t=1000, eps_start=1.0, eps_end=0.01,
     trainer = dqn_algo.DQNTrainer(
         agent=agent,
         env=env,
+        end_score=end_score,
         max_t=max_t,
         eps_start=eps_start,
         eps_end=eps_end,
@@ -168,13 +171,13 @@ def restore_agent(trainer, filename):
 if __name__ == '__main__':
 
     # Initialize environment and extract action and state dimensions.
-    env, state_size, action_size = load_env()
+    env, state_size, action_size = load_env(r'.')
 
     # Create agent used for training.
     agent = create_agent(state_size, action_size, duel=False)
 
     # Create DQNTrainer object to train agent.
-    trainer = create_trainer(agent, env)
+    trainer = create_trainer(agent, env, 13)
 
     # Train agent in specified environment!
     train_agent(trainer, 1000)
