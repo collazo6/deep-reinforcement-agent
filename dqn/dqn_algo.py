@@ -120,12 +120,14 @@ class DQNTrainer:
 
                 # Save successful agent model params and notify of statistics.
                 if self.i_episode < n_episodes:
-                    self.save()
                     s_ep = self.i_episode - 100
                     print(
                         f'\nEnvironment solved in {s_ep} episodes!'
                         f'\tAverage Score: {np.mean(self.scores_window):.2f}'
                     )
+                    print('Saving successful trainer...')
+                    self.save()
+                    print('Done.')
                 break
 
             self.i_episode += 1
@@ -164,11 +166,11 @@ class DQNTrainer:
         y = rolling_avgs[0].iloc[-1]
 
         # Set x, y ticks for graph axes and color for line.
-        x_end = int(100 * math.ceil(x/100)) + 1
-        x_max = x_end if x_end - x >= 50 else x_end + 100
-        x_ticks = np.arange(0, x_max, 50)
+        x_end = int(50 * math.ceil(x/50)) + 1
+        x_max = x_end if x_end - x >= 25 else x_end + 50
+        x_ticks = np.arange(50, x_max, 50)
         y_ticks = np.arange(0, int(y)+2, 1)
-        line_color = 'c' if model == 'qn' else 'y'
+        line_color = 'pink' if model == 'qn' else 'palegreen'
 
         # Plot rolling averages and save resulting plot
         fig, ax = plt.subplots(figsize=(12, 9))

@@ -148,11 +148,6 @@ def train_agent(trainer, n_episodes):
     minutes = delta / 60
     print(f'Training took {minutes:.1f} minutes.')
 
-    # Save successful network parameters.
-    print('Saving trainer...')
-    trainer.save()
-    print('Done.')
-
 
 def restore_agent(trainer, filename):
     """
@@ -174,7 +169,7 @@ if __name__ == '__main__':
     env, state_size, action_size = load_env(r'.')
 
     # Create agent used for training.
-    agent = create_agent(state_size, action_size, duel=False)
+    agent = create_agent(state_size, action_size, duel=True)
 
     # Create DQNTrainer object to train agent.
     trainer = create_trainer(agent, env, 13)
