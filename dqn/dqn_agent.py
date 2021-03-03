@@ -105,7 +105,7 @@ class Agent:
 
     def act(self, state, eps=0.):
         """
-        Returns actions for given state as per current policy.
+        Returns action for given state as per current policy.
 
         Parameters:
             state: Numpy array with info on current state.
@@ -147,7 +147,7 @@ class Agent:
         # Get expected Q values from local model.
         Q_expected = self.qnetwork_local(states).gather(1, actions)
 
-        # Compute and minimize the loss
+        # Compute and minimize the loss.
         loss = F.mse_loss(Q_expected, Q_targets)
         self.optimizer.zero_grad()
         loss.backward()

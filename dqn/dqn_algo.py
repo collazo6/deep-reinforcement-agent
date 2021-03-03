@@ -142,12 +142,6 @@ class DQNTrainer:
             rf'{self.save_dir}/checkpoint_{model}.pth'
         )
 
-    def restore(self, filename):
-        """Loads parameters for successful network."""
-        self.agent.qnetwork_local.load_state_dict(
-            torch.load(os.path.join(self.save_dir, filename))
-        )
-
     def plt_rolling_avgs(self):
         """Plots learning curve for successful network."""
 
