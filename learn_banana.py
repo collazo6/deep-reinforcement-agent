@@ -89,7 +89,7 @@ def create_agent(state_size, action_size, buffer_size=int(1e5), batch_size=64,
 
 
 def create_trainer(agent, env, end_score, max_t=1000, eps_start=1.0,
-                   eps_end=0.01, eps_decay=0.995, save_dir=r'./final_model'):
+                   eps_end=0.01, eps_decay=0.5, save_dir=r'./final_model'):
     """
     This function creates the trainer to train agent in specified environment.
 
@@ -172,7 +172,7 @@ if __name__ == '__main__':
     agent = create_agent(state_size, action_size, duel=True)
 
     # Create DQNTrainer object to train agent.
-    trainer = create_trainer(agent, env, 13)
+    trainer = create_trainer(agent, env, 39)
 
     # Train agent in specified environment!
     train_agent(trainer, 1000)

@@ -163,7 +163,7 @@ class DQNTrainer:
         x_end = int(50 * math.ceil(x/50)) + 1
         x_max = x_end if x_end - x >= 25 else x_end + 50
         x_ticks = np.arange(50, x_max, 50)
-        y_ticks = np.arange(0, int(y)+2, 1)
+        y_ticks = np.arange(0, int(y)+3, 1)
         line_color = 'pink' if model == 'qn' else 'palegreen'
 
         # Plot rolling averages and save resulting plot
@@ -179,7 +179,7 @@ class DQNTrainer:
             f'Episode: {x}\nScore: {y}',
             fontsize=10,
             xy=(x, y),
-            xytext=(x-22, y+0.15),
+            xytext=(x-15, y+0.15),
             horizontalalignment='left'
         )
         plt.savefig(rf'{self.save_dir}/scores_mavg_{model}_{x}')
