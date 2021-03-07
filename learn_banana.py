@@ -169,7 +169,7 @@ if __name__ == '__main__':
     env, state_size, action_size = load_env(r'.')
 
     # Create agent used for training.
-    agent = create_agent(state_size, action_size, duel=True)
+    agent = create_agent(state_size, action_size, duel=False)
 
     # Create DQNTrainer object to train agent.
     trainer = create_trainer(agent, env, 39)

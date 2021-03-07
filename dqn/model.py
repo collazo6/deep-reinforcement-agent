@@ -85,6 +85,6 @@ class DuelingQNetwork(nn.Module):
         features = self.feature_layer(state)
         values = self.value_stream(features)
         advantages = self.advantage_stream(features)
-        q_values = values + (advantages - advantages.max())
+        q_values = values + (advantages - advantages.mean(dim=1, keepdim=True))
 
         return q_values
