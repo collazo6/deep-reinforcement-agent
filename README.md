@@ -6,11 +6,11 @@ Utilizing a predefined environment, the above code initializes and trains an age
 
 For this task, the agent is challenged with collecting as many `yellow` bananas as possible while avoiding `blue` bananas.  Each yellow banana collected results in a score increase of `+1` while each blue banana results in a decrease of `-1`.  The environment is considered solved once an average score of `13` is achieved over 100 episodes, each consisting of 1000 timesteps.
 
-The agent is able to choose from `4` discrete actions at each timestep: *forward*, *backward*, *left* or *right*.  Actions are selected either randomly (to allow the agent to explore alternative policies) or via predictions based on the agent's current state.  State information includes `37` continuous values that provide ray-based perception data of objects that lay in the forward direction.  These states are used as inputs of either Deep Q Networks or Dueling Deep Q Networks which are initialized and updated frequently based on past experiences and their respective outcomes in order to optimize the agent's behavior over time.
-
 <div align="center">
   <img width="550" height="392" src="saved_files/trained_agent.gif">
 </div>
+
+The agent is able to choose from `4` discrete actions at each timestep: *forward*, *backward*, *left* or *right*.  Actions are selected either randomly (to allow the agent to explore alternative policies) or via predictions based on the agent's current state.  State information includes `37` continuous values that provide ray-based perception data of objects that lay in the forward direction.  These states are used as inputs of either Deep Q Networks or Dueling Deep Q Networks which are initialized and updated frequently based on past experiences and their respective outcomes in order to optimize the agent's behavior over time.
 
 ## Results
 In the `saved_files` directory, I have included the saved model weights and learning curve plot for the most succesful agent.  This agent was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.
