@@ -14,7 +14,7 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 </div>
 
 ## Results
-In this repository, I have included the saved model weights and learning curve plot for the most succesful agent.  The environment was able to be solved within 292 episodes.  With further tuning of the neural networks supplied or tweaking of parameters an even more efficient score may be achieved.
+In this repository, I have included the saved model weights and learning curve plot for the most succesful agent.  The environment was able to be solved within 292 episodes.
 
 <div align="center">
   <img width="700" height="500" img src="saved_files/scores_mavg_qn_292.png">
