@@ -12,4 +12,4 @@ For this task, the agent is challenged with collecting as many `yellow` bananas 
 </div>
 
 ## Dependencies
-In order to run the above code, you will have to set up and activate a customized Python environment.  Please follow the directions [here](https://github.com/udacity/deep-reinforcement-learning#dependencies) for setup instructions.
+In order to run the above code, you will have to set up and activate a customized Python environment.  Please follow the directions [here](https://github.com/udacity/deep-reinforcement-learning#dependencies){:target="_blank"} for setup instructions.
