@@ -14,7 +14,10 @@ For this task, the agent is challenged with collecting as many `yellow` bananas 
 ## Dependencies
 In order to run the above code, you will have to set up and activate a customized Python 3.6 environment.  Please follow the directions [here](https://github.com/udacity/deep-reinforcement-learning#dependencies) for setup instructions.
 
-To download the UnityEnvironment used, please follow the link corresponding to your operating system below and save it directly to your cloned repository.
+Next, please click the link corresponding to your operating system below which downloads the respective UnityEnvironment.  You may then save the resulting file directly inside your cloned repository in order to run the code!
 * [Linux](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
 * [Mac OSX](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
 * [Windows (64-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+
+## Train an Agent!
+All of the relevant functionality and tools you will need to create and train your agent are available in this repository.  Please use the **train_agent.py** file in order to run the training process.  If you would like to change any parameters to customize your agent or trainer, please update the relevant attributes in the function calls below the *if __name__ == '__main__':* block. :)
