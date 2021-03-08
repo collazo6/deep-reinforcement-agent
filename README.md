@@ -10,3 +10,6 @@ For this task, the agent is challenged with collecting as many `yellow` bananas 
 <div align="center">
   <img width="550" height="392" src="saved_files/trained_agent.gif">
 </div>
+
+## Dependencies
+In order to run the above code, you will have to set up and activate a customized Python environment.  Please follow the directions [here](https://github.com/udacity/deep-reinforcement-learning#dependencies) for setup instructions.
