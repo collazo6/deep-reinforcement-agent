@@ -12,4 +12,9 @@ For this task, the agent is challenged with collecting as many `yellow` bananas 
 </div>
 
 ## Dependencies
-In order to run the above code, you will have to set up and activate a customized Python environment.  Please follow the directions [here](https://github.com/udacity/deep-reinforcement-learning#dependencies){:target="_blank"} for setup instructions.
+In order to run the above code, you will have to set up and activate a customized Python 3.6 environment.  Please follow the directions [here](https://github.com/udacity/deep-reinforcement-learning#dependencies) for setup instructions.
+
+To download the UnityEnvironment used, please follow the link corresponding to your operating system below and save it directly to your cloned repository.
+* [Linux](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
+* [Mac OSX](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
+* [Windows (64-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
