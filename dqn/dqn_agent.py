@@ -1,4 +1,4 @@
-from dqn.model import QNetwork, DuelingQNetwork
+from dqn.dqn_model import QNetwork, DuelingQNetwork
 from collections import namedtuple
 import torch.nn.functional as F
 from collections import deque
