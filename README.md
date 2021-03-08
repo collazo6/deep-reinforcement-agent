@@ -10,4 +10,3 @@ For this task, the agent is challenged with collecting as many `yellow` bananas 
 <div align="center">
   <img width="550" height="392" src="saved_files/trained_agent.gif">
 </div>
-<img align="center" width="550" height="392" src="saved_files/trained_agent.gif">
