@@ -16,7 +16,7 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 In the `saved_files` directory, I have included the saved model weights and learning curve plot for the most succesful agent.  This agent was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.
 
 <div align="center">
-  <img width="700" height="500" img src="saved_files/scores_mavg_qn_292.png">
+  <img width="680" height="500" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
 ## Dependencies
@@ -28,4 +28,4 @@ Next, please click the link corresponding to your operating system below which w
 * [Windows (64-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
 
 ## Train an Agent
-All of the relevant functionality and tools you will need to create and train your agent are available in this repository.  Please use the `train_agent.py` file in order to run the training process.  If you would like to change any parameters to customize your agent or trainer, please update the relevant attributes in the function calls below the `if __name__ == '__main__'` block.
+All of the relevant functionality and tools you will need to create and train your agent are available in this repository.  Please use the `train_agent.py` file in order to run the training process.  If you would like to change any parameters to customize your agent or trainer, please update the relevant attributes in the function calls below the `if __name__ == '__main__:'` block.
