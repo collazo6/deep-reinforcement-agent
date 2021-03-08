@@ -164,7 +164,7 @@ class DQNTrainer:
         x_max = x_end if x_end - x >= 25 else x_end + 50
         x_ticks = np.arange(50, x_max, 50)
         y_ticks = np.arange(0, int(y)+3, 1)
-        line_color = 'pink' if model == 'qn' else 'palegreen'
+        line_color = 'lightpink' if model == 'qn' else 'palegreen'
 
         # Plot rolling averages and save resulting plot
         fig, ax = plt.subplots(figsize=(12, 9))

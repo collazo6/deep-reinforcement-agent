@@ -44,7 +44,7 @@ def load_env(env_loc):
 
 
 def create_agent(state_size, action_size, buffer_size=int(1e5), batch_size=64,
-                 gamma=0.99, tau=1e-3, lr=5e-4, update_frequency=4, duel=True):
+                 gamma=0.99, tau=1e-3, lr=5e-4, update_frequency=4, duel=False):
     """
     This function creates the agent with specified parameters for training.
 
