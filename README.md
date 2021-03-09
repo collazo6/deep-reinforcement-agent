@@ -16,12 +16,15 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 In the `saved_files` directory, I have included the saved model weights and learning curve plot for the most succesful agent.  This agent, which you can see operating in the GIF above, was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.  A local and target network were utilized in order to stabilize the training process.
 
 <div align="center">
-  <img width="650" height="500" img src="saved_files/scores_mavg_qn_292.png">
+  <img width="550" height="423" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
-
+<br />
+<br />
 
 Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implemenation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed.  Below you may see the learning curves of both Q Network implemenations to compare their performances over time.
+
+<br />
 
 <div align="center">
   <img width="450" height="346" img src="saved_files/scores_mavg_dqn_1000.png">
