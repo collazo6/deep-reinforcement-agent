@@ -15,6 +15,8 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 ## Results
 In the `saved_files` directory, I have included the saved model weights and learning curve plot for the most succesful agent.  This agent, which you can see operating in the GIF above, was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.  A local and target network were utilized in order to stabilize the training process.
 
+<br />
+
 <div align="center">
   <img width="550" height="423" img src="saved_files/scores_mavg_qn_292.png">
 </div>
