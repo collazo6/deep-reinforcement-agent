@@ -31,8 +31,8 @@ Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network
 <br />
 
 <div align="center">
-  <img width="450" height="346" img src="saved_files/scores_mavg_dqn_1000.png">
-  <img width="450" height="346" img src="saved_files/scores_mavg_qn_1000.png">
+  <img width="550" height="423" img src="saved_files/scores_mavg_dqn_1000.png">
+  <img width="550" height="423" img src="saved_files/scores_mavg_qn_1000.png">
 </div>
 
 ## Dependencies
