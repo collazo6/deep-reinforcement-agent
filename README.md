@@ -32,6 +32,7 @@ Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network
 
 <div align="center">
   <img width="550" height="423" img src="saved_files/scores_mavg_qn_1000.png">
+  <br />
   <img width="550" height="423" img src="saved_files/scores_mavg_dqn_1000.png">
 </div>
 
