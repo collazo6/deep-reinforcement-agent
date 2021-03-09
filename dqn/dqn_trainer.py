@@ -146,8 +146,8 @@ class DQNTrainer:
         """Plots learning curve for successful network."""
 
         # Set model type strings for plot title and filename.
-        model_type, model = ('Dueling Q Network', 'dqn') if \
-            self.agent.hparams.duel else ('Q Network', 'qn')
+        model_type, model = ('Dueling Deep Q Network', 'dqn') if \
+            self.agent.hparams.duel else ('Deep Q Network', 'qn')
 
         # Calculate rolling averages based on the last 25 episodes.
         rolling_avgs = pd.DataFrame(self.scores).rolling(100).mean()
@@ -160,27 +160,28 @@ class DQNTrainer:
         y = rolling_avgs[0].iloc[-1]
 
         # Set x, y ticks for graph axes and color for line.
-        x_end = int(50 * math.ceil(x/50)) + 1
-        x_max = x_end if x_end - x >= 25 else x_end + 50
-        x_ticks = np.arange(50, x_max, 50)
-        y_ticks = np.arange(0, int(y)+3, 1)
-        line_color = 'lightpink' if model == 'qn' else 'palegreen'
+        x_end = int(25 * math.ceil(x/25)) + 1
+        x_max = x_end if x_end - x >= 25 else x_end + 25
+        x_ticks = np.arange(100, x_max, 25)
+        y_ticks = np.arange(4, int(y)+2, 1)
+        line_color = 'khaki' if model == 'qn' else 'lemonchiffon'
 
         # Plot rolling averages and save resulting plot
         fig, ax = plt.subplots(figsize=(12, 9))
-        ax.plot(rolling_avgs, color=line_color)
+        ax.plot(rolling_avgs, color=line_color, linewidth=1.5)
         ax.grid(color='w', linewidth=0.2)
         ax.set_xticks(x_ticks)
         ax.set_yticks(y_ticks)
-        ax.set_title(f'Learning Curve: {model_type}', fontsize=30)
-        ax.set_xlabel('Episode', fontsize=20)
-        ax.set_ylabel('Score', fontsize=20)
+        ax.set_title(f'Learning Curve: {model_type}', fontsize=33)
+        ax.set_xlabel('Episode', fontsize=22)
+        ax.set_ylabel('Score', fontsize=22)
         ax.annotate(
             f'Episode: {x}\nScore: {y}',
-            fontsize=10,
+            fontsize=12,
             xy=(x, y),
-            xytext=(x-15, y+0.15),
+            xytext=(x-12, y+0.15),
             horizontalalignment='left'
         )
+        plt.tight_layout()
         plt.savefig(rf'{self.save_dir}/scores_mavg_{model}_{x}')
         plt.show()

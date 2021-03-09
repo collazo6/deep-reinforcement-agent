@@ -172,10 +172,10 @@ if __name__ == '__main__':
     agent = create_agent(state_size, action_size, duel=False)
 
     # Create DQNTrainer object to train agent.
-    trainer = create_trainer(agent, env, 13)
+    trainer = create_trainer(agent, env, end_score=13)
 
     # Train agent in specified environment!
-    train_agent(trainer, 1000)
+    train_agent(trainer, n_episodes=1000)
 
     # Restore past successful agent.
     # agent = restore_agent(trainer, 'checkpoint_dueling_dqn.pth')
