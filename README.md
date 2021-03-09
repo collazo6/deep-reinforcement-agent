@@ -19,6 +19,8 @@ In the `saved_files` directory, I have included the saved model weights and lear
   <img width="650" height="500" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
+
+
 Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implemenation on the route to a score of 13, the Dueling Deep Q Network improved performance as the score was surpassed.  Below you may see the learning curves of both Q Network implemenations to view their performances over time.
 
 <div align="center">
