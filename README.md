@@ -26,7 +26,7 @@ In the `saved_files` directory, you may find the saved model weights and learnin
 <br />
 <br />
 
-Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implementation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed and its training remained more stable.  A score above 16 was achieved within 500 episodes by the Dueling Deep Q Network, while it took almost 600 episodes for the Deep Q Network to accomplish this same feat.  Below you may see the learning curves of both Deep Q Network implemenations to compare their performances over time.
+Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implementation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed and its training remained more stable.  A score above 16 was achieved within 500 episodes by the Dueling Deep Q Network, while it took almost 600 episodes for the Deep Q Network to accomplish this same feat.  Below you may see the learning curves for both Q Network implemenations to compare their performances over time.
 
 <br />
 
