@@ -26,7 +26,7 @@ In the `saved_files` directory, I have included the saved model weights and lear
 <br />
 <br />
 
-Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implementation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed and its training remained more stable.  Below you may see the learning curves of both Q Network implemenations to compare their performances over time.
+Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implementation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed and its training remained more stable.  A score of 16 was achieved within 500 episodes by the Dueling Deep Q Network, while it took almost 600 for the Deep Neural Network to accomplish the same feat.  Below you may see the learning curves of both Q Network implemenations to compare their performances over time.
 
 <br />
 
