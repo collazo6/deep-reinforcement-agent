@@ -11,9 +11,9 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 <br />
 
 <div align="center">
-  <img width="350" height="250" src="saved_files/untrained_agent.gif">
+  <img width="450" height="346" src="saved_files/untrained_agent.gif">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="350" height="250" src="saved_files/trained_agent.gif">
+  <img width="450" height="346" src="saved_files/trained_agent.gif">
 </div>
 
 ## Results
