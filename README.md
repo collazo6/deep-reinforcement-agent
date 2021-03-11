@@ -8,24 +8,36 @@ For this task, the agent is challenged with collecting as many `yellow` bananas 
 
 The agent is able to choose from `4` discrete actions at each timestep: *forward*, *backward*, *left* or *right*.  Actions are selected either randomly (to allow the agent to explore alternative policies) or via predictions based on the agent's current state.  State information includes `37` continuous values that provide ray-based perception data of objects that lay in the forward direction.  These states are used as inputs of either Deep Q Networks or Dueling Deep Q Networks which are initialized and updated frequently based on past experiences and their respective outcomes in order to optimize the agent's behavior over time.
 
+<br />
+
 <div align="center">
   <img width="550" height="392" src="saved_files/trained_agent.gif">
 </div>
 
 ## Results
-In the `saved_files` directory, I have included the saved model weights and learning curve plot for the most succesful agent.  This agent, which you can see operating in the GIF above, was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.  A local and target network were utilized in order to stabilize the training process.
+In the `saved_files` directory, you may find the saved model weights and learning curve plot for the most succesful agent.  This agent, which you can see operating in the GIF above, was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.  A local and target network were utilized in order to stabilize the training process.  The graph below depicts the agent's performance over time in terms of relative score averaged over the past 100 episodes.
+
+<br />
 
 <div align="center">
-  <img width="650" height="500" img src="saved_files/scores_mavg_qn_292.png">
+  <img width="550" height="423" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
+<br />
+<br />
 
+Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implementation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed and its training remained more stable.  A score above 16 was achieved within 500 episodes by the Dueling Deep Q Network, while it took almost 600 episodes for the Deep Q Network to accomplish this same feat.  Below you may see the learning curves for both Q Network implemenations to compare their performances over time.
 
-Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network implemenation en route to a score of 13, the Dueling Deep Q Network improved performance at a much faster pace as the score was surpassed.  Below you may see the learning curves of both Q Network implemenations to compare their performances over time.
+<br />
 
 <div align="center">
-  <img width="500" height="385" img src="saved_files/scores_mavg_dqn_1000.png">
-  <img width="500" height="385" img src="saved_files/scores_mavg_qn_1000.png">
+  <img width="550" height="423" img src="saved_files/scores_mavg_qn_1000.png">
+</div>
+
+<br />
+
+<div align="center">
+  <img width="550" height="423" img src="saved_files/scores_mavg_dqn_1000.png">
 </div>
 
 ## Dependencies
