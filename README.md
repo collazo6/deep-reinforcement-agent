@@ -11,9 +11,9 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 <br />
 
 <div align="center">
-  <img width="450" height="346" src="saved_files/untrained_agent.gif">
+  <img width="420" height="323" src="saved_files/untrained_agent.gif">
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img width="450" height="346" src="saved_files/trained_agent.gif">
+  <img width="420" height="323" src="saved_files/trained_agent.gif">
 </div>
 
 ## Results
@@ -22,7 +22,7 @@ In the `saved_files` directory, you may find the saved model weights and learnin
 <br />
 
 <div align="center">
-  <img width="400" height="308" img src="saved_files/scores_mavg_qn_292.png">
+  <img width="480" height="370" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
 <br />
