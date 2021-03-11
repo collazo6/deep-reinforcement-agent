@@ -12,7 +12,7 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 
 <div align="center">
   <img width="350" height="250" src="saved_files/untrained_agent.gif">
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <img width="350" height="250" src="saved_files/trained_agent.gif">
 </div>
 
@@ -33,13 +33,9 @@ Although the Deep Q Network surprisingly outperformed the Dueling Deep Q Network
 <br />
 
 <div align="center">
-  <img width="550" height="423" img src="saved_files/scores_mavg_qn_1000.png">
-</div>
-
-<br />
-
-<div align="center">
-  <img width="550" height="423" img src="saved_files/scores_mavg_dqn_1000.png">
+  <img width="350" height="269" img src="saved_files/scores_mavg_qn_1000.png">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <img width="350" height="269" img src="saved_files/scores_mavg_dqn_1000.png">
 </div>
 
 ## Dependencies
