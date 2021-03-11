@@ -22,7 +22,7 @@ In the `saved_files` directory, you may find the saved model weights and learnin
 <br />
 
 <div align="center">
-  <img width="550" height="423" img src="saved_files/scores_mavg_qn_292.png">
+  <img width="400" height="308" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
 <br />
