@@ -6,7 +6,7 @@ Utilizing a predefined environment, the above code initializes and trains an age
 
 For this task, the agent is challenged with collecting as many `yellow` bananas as possible while avoiding `blue` bananas.  Each yellow banana collected results in a score increase of `+1` while each blue banana results in a decrease of `-1`.  The environment is considered solved once an average score of `13` is achieved over 100 episodes, each consisting of 1000 timesteps.
 
-The agent is able to choose from `4` discrete actions at each timestep: *forward*, *backward*, *left* or *right*.  Actions are selected either randomly (to allow the agent to explore alternative policies) or via predictions based on the agent's current state.  State information includes `37` continuous values that provide ray-based perception data of objects that lay in the forward direction.  These states are used as inputs of either Deep Q Networks or Dueling Deep Q Networks which are initialized and updated frequently based on past experiences and their respective outcomes in order to optimize the agent's behavior over time.
+The agent is able to choose from `4` discrete actions at each timestep: *forward*, *backward*, *left* or *right*.  Actions are selected either randomly (to allow the agent to explore alternative policies) or via predictions based on the agent's current state.  State information includes `37` continuous values that provide ray-based perception data on objects that lay in the forward direction.  These states are used as inputs of either Deep Q Networks or Dueling Deep Q Networks which are initialized and updated frequently based on past experiences and their respective outcomes in order to optimize the agent's behavior over time.
 
 <br />
 
@@ -22,7 +22,7 @@ In the `saved_files` directory, you may find the saved model weights and learnin
 <br />
 
 <div align="center">
-  <img width="530" height="408" img src="saved_files/scores_mavg_qn_292.png">
+  <img width="550" height="423" img src="saved_files/scores_mavg_qn_292.png">
 </div>
 
 <br />
