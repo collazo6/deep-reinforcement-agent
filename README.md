@@ -17,7 +17,7 @@ The agent is able to choose from `4` discrete actions at each timestep: *forward
 </div>
 
 ## Results
-In the `saved_files` directory, you may find the saved model weights and learning curve plot for the most succesful agent.  The trained agent, which you can see operating in the GIF above on the right, was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.  A local and target network were utilized in order to stabilize the training process.  The graph below depicts the agent's performance over time in terms of relative score averaged over the past 100 episodes.
+In the `saved_files` directory, you may find the saved model weights and learning curve plot for the most successful agent.  The trained agent, which you can see operating in the GIF above on the right, was able to solve the environment within 292 episodes utilizing a Deep Q Network algorithm for action predictions.  A local and target network were utilized in order to stabilize the training process.  The graph below depicts the agent's performance over time in terms of relative score averaged over the past 100 episodes.
 
 <br />
 
