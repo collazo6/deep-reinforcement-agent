@@ -46,4 +46,4 @@ Next, please click the link corresponding to your operating system below which w
 * [Windows (64-bit)](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
 
 ## Train an Agent
-All of the relevant functionality and tools you will need to create and train your are available in this repository.  Please use the `train_agent.py` file in order to run the training process.  If you would like to change any parameters to customize your agent or trainer, please update the relevant attributes in the function calls below the `if __name__ == '__main__':` block.
+All of the relevant functionality and tools you will need to create and train your agent are available in this repository.  Please use the `train_agent.py` file in order to run the training process.  If you would like to change any parameters to customize your agent or trainer, please update the relevant attributes in the function calls below the `if __name__ == '__main__':` block.
