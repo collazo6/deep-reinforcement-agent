@@ -1,4 +1,4 @@
-# Deep Q Networks: Utilizing Deep Reinforcement Learning to Train Agents on Specified Tasks
+Utilizing Deep Reinforcement Learning to Train Agents on Specified Tasks with Deep Q Networks
 Deep Reinforcement Learning is among the most promising breakthroughs when it comes to the future of deep learning and realizing *actual* artificial intelligence.  While more primitive algorithms may be used for simple prediction tasks, Reinforcement Learning algorithms such as Deep Q Networks enable scientists to train an agent on tasks through experience in predefined ecosystems.  This concept is very similar to the way humans are able to learn from their environment.  Through real-world experiences, humans are able to evaluate cues of encouragement or dissuasion from sensory information in order to build on their ideas on how to interact with the world around them.  Deliberate mathematical equations, theory and deep learning combine to enable this learning technique in artificial reality.
 
 ## Details
